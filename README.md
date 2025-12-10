@@ -10,3 +10,8 @@ Deployed to testnet during learning process.
 
 ## Notes
 All comments are written in English for practice.
+
+## Environment
+- Solidity ^0.8.0
+- Remix
+- Ethereum testnet (Sepolia / Goerli)
