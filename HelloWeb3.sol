@@ -8,4 +8,8 @@ contract HelloWeb3 {
     constructor(string memory _msg) {
         message = _msg;
     }
+
+	function setMessage(string memory newMessage) public {
+		message = newMessage;
+	}
 }

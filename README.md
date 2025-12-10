@@ -15,3 +15,7 @@ All comments are written in English for practice.
 - Solidity ^0.8.0
 - Remix
 - Ethereum testnet (Sepolia / Goerli)
+
+## Usage
+Deploy the contract using Remix and pass an initial message to the constructor.
+Then call `setMessage("Hello Again")`
