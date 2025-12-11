@@ -8,6 +8,8 @@ contract HelloWeb3 {
     bool public isActive;
     string public ownerName;
 
+    mapping(address => uint) public userCount;
+
 	// This constructor sets the initial message when deploying the contract.
     constructor(string memory _msg) {
         message = _msg;
@@ -20,6 +22,11 @@ contract HelloWeb3 {
         message = newMessage;
     }
 
+    // increase count for each caller (msg.sender)
+    function increase() public {
+        userCount[msg.sender] += 1;
+    }
+    
     /*
     Usage in Remix:
     1. Deploy contract with initial message.
