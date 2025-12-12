@@ -1,4 +1,4 @@
-// SPDX-License-Indentifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 // simple per-user message board based on mapping and msg.sender
@@ -9,9 +9,14 @@ contract HelloWeb3 {
     bool public isActive;
     address public owner;
     string public ownerName;
+    struct Profile {
+        string name;
+        string bio;
+    }
 
     mapping(address => uint) public userCount;
     mapping(address => string) public userMessage;
+    mapping(address => Profile) public profiles;
 
 	// This constructor sets the initial message when deploying the contract.
     constructor(string memory _msg) {
@@ -46,6 +51,12 @@ contract HelloWeb3 {
     
     function setActive(bool _status) public onlyOwner {
         isActive = _status;    
+    }
+
+    // basic on-chain user profile system
+    function setProfile(string memory _name, string memory _bio) public {
+        require(isActive, "Registration closed");
+        profiles[msg.sender] = Profile(_name, _bio);
     }
     /*
     Usage in Remix:
