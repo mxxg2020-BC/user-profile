@@ -5,8 +5,9 @@ pragma solidity ^0.8.0;
 contract HelloWeb3 {
     // basic state variables for demo purpose
     string public message;
-    uint public couter;
+    uint public counter;
     bool public isActive;
+    address public owner;
     string public ownerName;
 
     mapping(address => uint) public userCount;
@@ -15,11 +16,17 @@ contract HelloWeb3 {
 	// This constructor sets the initial message when deploying the contract.
     constructor(string memory _msg) {
         message = _msg;
-        couter = 1;
+        counter = 1;
         isActive = true;
         ownerName = "anonymous";
+        owner = msg.sender; // set the contract deployer as owner
     }
 
+    // ensure only contract owner can call certain functions
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner!");
+        _;
+    }
     //function setMessage(string memory newMessage) public {
         //message = newMessage;
     function setMessage(string memory _msg) public {
@@ -37,6 +44,9 @@ contract HelloWeb3 {
         userCount[msg.sender] += 1;
     }
     
+    function setActive(bool _status) public onlyOwner {
+        isActive = _status;    
+    }
     /*
     Usage in Remix:
     1. Deploy contract with initial message.
