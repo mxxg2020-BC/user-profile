@@ -14,6 +14,8 @@ contract HelloWeb3 {
         string bio;
     }
 
+    // event to record profile updates on-chain
+    event ProfileUpdated(address indexed user, string name, string bio);
     mapping(address => uint) public userCount;
     mapping(address => string) public userMessage;
     mapping(address => Profile) public profiles;
@@ -57,6 +59,7 @@ contract HelloWeb3 {
     function setProfile(string memory _name, string memory _bio) public {
         require(isActive, "Registration closed");
         profiles[msg.sender] = Profile(_name, _bio);
+        emit ProfileUpdated(msg.sender, _name, _bio);
     }
     /*
     Usage in Remix:
